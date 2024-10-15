@@ -6,28 +6,39 @@
 
 std::string minWindow(std::string s, std::string t) {
     std::vector<std::string> tmp;
-    int i = 0;
-    while(i < s.size()){
-        int j = 0;
+    for (int i = 0; i < s.size(); ++i) {
+        int j = i;
         int len = 0;
-        int left = 0;
-        while(j < t.size() && i < s.size()) {
-            if (s[i] == t[j]) {
-                if (len == 0) { 
-                    left = i;
+        int left = -1;
+        while(j < s.size()) {
+            std::string temporary;
+            for (int k = 0; k < t.size(); ++k) {
+                if (s[j] == t[k]) {
+                    if (left == -1) {
+                        left = j;
+                    }
+                    ++len;
+                    break;
                 }
-                ++j;
-                ++len;
             }
-            ++i;
-        }   
-        if (len == t.size()) {
-            std::string sub = s.substr(left, i - left);
-            tmp.push_back(sub);
+            if (len >= t.size()) {
+                std::string sub = s.substr(left, j - left + 1);
+                if (temporary != sub) {
+                    tmp.push_back(sub);
+                    temporary = sub;
+                break;
+            }
+            }
+            ++j;
         }
-        ++i;
     }
-    return (tmp.empty()) ? "" : *std::min_element(tmp.begin(), tmp.end());
+    if (tmp.empty()) {
+        return "";
+    }
+    std::sort(tmp.begin(), tmp.end(), [](const std::string& a, const std::string& b) {
+        return a.size() < b.size();
+    });
+    return tmp[0];
 }
 
 int main() {
@@ -39,7 +50,7 @@ int main() {
 }
 
 
-// Given two strings s and t of lengths m and n respectively, return the minimum window 
+// Given two tmp s and t of lengths m and n respectively, return the minimum window 
 // substring
 //  of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
 
