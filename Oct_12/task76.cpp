@@ -2,6 +2,8 @@
 #include <vector>
 #include <algorithm>
 
+// https://leetcode.com/problems/minimum-window-substring/description/
+
 std::string minWindow(std::string s, std::string t) {
     std::vector<std::string> tmp;
     int i = 0;
@@ -23,6 +25,7 @@ std::string minWindow(std::string s, std::string t) {
             std::string sub = s.substr(left, i - left);
             tmp.push_back(sub);
         }
+        ++i;
     }
     return (tmp.empty()) ? "" : *std::min_element(tmp.begin(), tmp.end());
 }
@@ -35,3 +38,9 @@ int main() {
     return 0;
 }
 
+
+// Given two strings s and t of lengths m and n respectively, return the minimum window 
+// substring
+//  of s such that every character in t (including duplicates) is included in the window. If there is no such substring, return the empty string "".
+
+// The testcases will be generated such that the answer is unique.
