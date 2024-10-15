@@ -31,7 +31,7 @@ int main() {
     std::string s = "ADOBECODEBANC";
     std::string t = "ABC";
     std::string res = minWindow(s, t);
-    std::cout << "Result: " << res << std::endl;
+    std::cout << "Result:  " << res << std::endl;
     return 0;
 }
 
