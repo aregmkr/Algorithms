@@ -35,9 +35,10 @@ std::string minWindow(std::string s, std::string t) {
     if (tmp.empty()) {
         return "";
     }
-    std::sort(tmp.begin(), tmp.end(), [](const std::string& a, const std::string& b) {
-        return a.size() < b.size();
-    });
+    
+    for (const std::string& item : tmp) {
+        std::cout << item << std::endl;
+    }   
     return tmp[0];
 }
 
